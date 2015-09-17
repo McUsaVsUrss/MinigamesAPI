@@ -2,6 +2,7 @@
 bin
 .classpath
 .project
+.idea/
 *.bak
 *.rar
 *.zip
