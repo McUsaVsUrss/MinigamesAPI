@@ -5,6 +5,7 @@ import com.comze_instancelabs.minigamesapi.events.*;
 import com.comze_instancelabs.minigamesapi.util.*;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -1458,4 +1459,3 @@ public class Arena {
     }
 
 }
-
