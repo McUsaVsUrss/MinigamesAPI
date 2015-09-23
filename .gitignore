@@ -1,0 +1,13 @@
+.settings
+bin
+.classpath
+.project
+.idea/
+*.bak
+*.rar
+*.zip
+*.class
+target/
+javadocs/
+*.iml
+.idea/workspace.xml
