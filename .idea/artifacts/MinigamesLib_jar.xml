@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="MinigamesLib:jar">
-    <output-path>$USER_HOME$/Desktop/Plugin/1.8/plugins</output-path>
-    <root id="archive" name="MinigamesLib.jar">
-      <element id="module-output" name="MinigamesLib" />
-    </root>
-  </artifact>
-</component>
