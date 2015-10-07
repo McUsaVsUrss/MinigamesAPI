@@ -437,15 +437,15 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
                             Effects.sendGameModeChange(p, 3);
                         }
                     }
-                } else if (args[0].equalsIgnoreCase("bungeetest")) {
+                } /*else if (args[0].equalsIgnoreCase("bungeetest")) {
                     if (sender instanceof Player) {
                         Player p = (Player) sender;
                         if (p.isOp()) {
                             PluginInstance pli = this.pinstances.get(Bukkit.getPluginManager().getPlugin("MGSkyWars"));
-                            BungeeSocket.sendSignUpdate(pli, pli.getArenas().get(0));
+                            //BungeeSocket.sendSignUpdate(pli, pli.getArenas().get(0));
                         }
                     }
-                }
+                }*/
                 return true;
             }
             if (args.length < 1) {
@@ -503,7 +503,7 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
         }
         ByteArrayDataInput in = ByteStreams.newDataInput(message);
         String subchannel = in.readUTF();
-        System.out.println(subchannel);
+        //System.out.println(subchannel);
         if (subchannel.equals("MinigamesLibBack")) {
             short len = in.readShort();
             byte[] msgbytes = new byte[len];
@@ -511,11 +511,11 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
 
             DataInputStream msgin = new DataInputStream(new ByteArrayInputStream(msgbytes));
             try {
-                final String playerData = msgin.readUTF();
-                final String plugin_ = playerData.split(":")[0];
-                final String arena = playerData.split(":")[1];
+                String playerData = msgin.readUTF();
+                String plugin_ = playerData.split(":")[0];
+                String arena = playerData.split(":")[1];
                 final String playername = playerData.split(":")[2];
-                System.out.println(plugin_ + " -> " + arena);
+                //System.out.println(plugin_ + " -> " + arena);
                 JavaPlugin plugin = null;
                 for (JavaPlugin pl : this.pinstances.keySet()) {
                     if (pl.getName().contains(plugin_)) {
@@ -549,9 +549,9 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
 
             DataInputStream msgin = new DataInputStream(new ByteArrayInputStream(msgbytes));
             try {
-                final String requestData = msgin.readUTF();
-                final String plugin_ = requestData.split(":")[0];
-                final String arena = requestData.split(":")[1];
+                String requestData = msgin.readUTF();
+                String plugin_ = requestData.split(":")[0];
+                String arena = requestData.split(":")[1];
                 System.out.println(plugin_ + " -> " + arena);
                 for (JavaPlugin pl : this.pinstances.keySet()) {
                     if (pl.getName().contains(plugin_)) {

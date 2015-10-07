@@ -15,7 +15,7 @@ public class BungeeSocket {
 
     // We're gonna send simple strings like: sign:<minigame>:<arena>:<state>:<players>/<amxplayers>
 
-    static ArrayList<Integer> portsUp = new ArrayList<Integer>();
+    /*static ArrayList<Integer> portsUp = new ArrayList<Integer>();
     static boolean init = false;
     static boolean initializing = false;
 
@@ -65,5 +65,5 @@ public class BungeeSocket {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

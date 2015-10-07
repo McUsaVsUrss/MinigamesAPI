@@ -194,11 +194,9 @@ public class Util {
     }
 
     public static void saveArenaToFile(JavaPlugin plugin, String arena) {
-        File f = new File(plugin.getDataFolder() + "/" + arena);
         Cuboid c = new Cuboid(Util.getComponentForArena(plugin, arena, "bounds.low"), Util.getComponentForArena(plugin, arena, "bounds.high"));
         Location start = c.getLowLoc();
         Location end = c.getHighLoc();
-
         Utils.saveToFile(start, end, arena, null);
         //int width = end.getBlockX() - start.getBlockX();
         //int length = end.getBlockZ() - start.getBlockZ();
@@ -738,17 +736,17 @@ public class Util {
 
     public static void giveSpectatorItems(JavaPlugin plugin, Player p) {
         PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
-        ItemStack s_item = new ItemStack(plugin.getConfig().getInt("config.selection_items.spectator_item"));
+        /*ItemStack s_item = new ItemStack(plugin.getConfig().getInt("config.selection_items.spectator_item"));
         ItemMeta s_imeta = s_item.getItemMeta();
         s_imeta.setDisplayName(pli.getMessagesConfig().spectator_item);
-        s_item.setItemMeta(s_imeta);
+        s_item.setItemMeta(s_imeta);*/
 
         ItemStack exit_item = new ItemStack(plugin.getConfig().getInt("config.selection_items.exit_item"));
         ItemMeta exitimeta = exit_item.getItemMeta();
         exitimeta.setDisplayName(pli.getMessagesConfig().exit_item);
         exit_item.setItemMeta(exitimeta);
 
-        p.getInventory().addItem(s_item);
+        //p.getInventory().addItem(s_item);
         p.getInventory().setItem(8, exit_item);
         p.updateInventory();
     }

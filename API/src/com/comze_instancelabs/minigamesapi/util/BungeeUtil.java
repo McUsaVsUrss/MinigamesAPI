@@ -16,7 +16,7 @@ import java.io.IOException;
 public class BungeeUtil {
 
     public static void connectToServer(JavaPlugin plugin, String player, String server) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        /*ByteArrayOutputStream stream = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(stream);
         try {
             out.writeUTF("Connect");
@@ -24,12 +24,13 @@ public class BungeeUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Bukkit.getPlayer(player).sendPluginMessage(plugin, "BungeeCord", stream.toByteArray());
+        Bukkit.getPlayer(player).sendPluginMessage(plugin, "BungeeCord", stream.toByteArray());*/
     }
 
     public static void sendSignUpdateRequest(JavaPlugin plugin, String minigame, Arena arena) {
-        PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
-        BungeeSocket.sendSignUpdate(pli, arena);
+        return;
+        /*PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
+        //BungeeSocket.sendSignUpdate(pli, arena);
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         try {
             out.writeUTF("Forward");
@@ -46,7 +47,7 @@ public class BungeeUtil {
             Bukkit.getServer().sendPluginMessage(MinigamesAPI.getAPI(), "BungeeCord", out.toByteArray());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }
