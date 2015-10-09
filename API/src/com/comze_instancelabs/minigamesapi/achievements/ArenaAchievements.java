@@ -23,7 +23,7 @@ public class ArenaAchievements {
         this.pli = pli;
     }
 
-    public void openGUI(final String p, boolean sql) {
+    public void openGUI(String p, boolean sql) {
         IconMenu iconm;
         ArrayList<AAchievement> alist = loadPlayerAchievements(p, sql);
         int mincount = alist.size();

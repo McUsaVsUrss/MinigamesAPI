@@ -64,7 +64,7 @@ public class SpectatorManager {
         }
     }
 
-    public void openSpectatorGUI(final Player p, Arena a) {
+    public void openSpectatorGUI(Player p, Arena a) {
         IconMenu iconm;
         int mincount = a.getAllPlayers().size();
         if (lasticonm.containsKey(p.getName())) {

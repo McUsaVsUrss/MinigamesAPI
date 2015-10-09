@@ -124,7 +124,7 @@ public class SmartReset implements Runnable {
      * Resets the raw changed blocks on the main thread
      */
     public void resetRaw() {
-/*		for (final SmartArenaBlock ablock : changed.values()) {
+/*		for (SmartArenaBlock ablock : changed.values()) {
 			try {
 				resetSmartResetBlock(ablock);
 			} catch (Exception e) {
@@ -139,7 +139,7 @@ public class SmartReset implements Runnable {
     }
 
     public void resetSmartResetBlock(SmartArenaBlock ablock) {
-/*		final Block b_ = ablock.getBlock().getWorld().getBlockAt(ablock.getBlock().getLocation());
+/*		Block b_ = ablock.getBlock().getWorld().getBlockAt(ablock.getBlock().getLocation());
 		if (b_.getType() == Material.FURNACE) {
 			((Furnace) b_.getState()).getInventory().clear();
 			((Furnace) b_.getState()).update();

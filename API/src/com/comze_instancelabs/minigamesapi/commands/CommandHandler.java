@@ -640,13 +640,13 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean resetArena(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean resetArena(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".reset")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
         }
         if (args.length > 1) {
-            final Arena a = pli.getArenaByName(args[1]);
+            Arena a = pli.getArenaByName(args[1]);
             if (a != null) {
                 if (Validator.isArenaValid(plugin, a)) {
                     Bukkit.getScheduler().runTask(plugin, new Runnable() {
@@ -663,7 +663,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean setAuthor(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean setAuthor(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".setup")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
@@ -681,7 +681,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean setDescription(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean setDescription(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".setup")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
@@ -699,7 +699,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean setArenaDisplayName(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean setArenaDisplayName(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".setup")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
@@ -750,7 +750,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean setKit(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean setKit(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 1) {
             if (!plugin.getConfig().getBoolean("config.classes_enabled")) {
                 return true;
@@ -814,7 +814,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean openShop(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean openShop(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 1) {
             if (!plugin.getConfig().getBoolean("config.shop_enabled")) {
                 return true;
@@ -848,12 +848,12 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean getStats(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean getStats(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         Util.sendStatsMessage(pli, p);
         return true;
     }
 
-    public boolean getLeaderboards(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean getLeaderboards(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         boolean wins = true;
         int count = 10;
         if (args.length > 2) {
@@ -916,7 +916,7 @@ public class CommandHandler {
     }
 
     // Hologram commands
-    public boolean setHologram(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean setHologram(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".setup")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
@@ -927,7 +927,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean listHolograms(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean listHolograms(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".setup")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
@@ -948,7 +948,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean removeHologram(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean removeHologram(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".setup")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
@@ -965,7 +965,7 @@ public class CommandHandler {
     }
 
     // Party commands
-    public boolean partyInvite(CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean partyInvite(CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 1) {
             if (p.getName().equalsIgnoreCase(args[1])) {
                 p.sendMessage(MinigamesAPI.getAPI().partymessages.cannot_invite_yourself);
@@ -1006,7 +1006,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean partyAccept(CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean partyAccept(CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 1) {
             if (!Validator.isPlayerOnline(args[1])) {
                 p.sendMessage(MinigamesAPI.getAPI().partymessages.player_not_online.replaceAll("<player>", args[1]));
@@ -1053,7 +1053,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean partyKick(CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean partyKick(CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 1) {
             if (!Validator.isPlayerOnline(args[1])) {
                 p.sendMessage(MinigamesAPI.getAPI().partymessages.player_not_online.replaceAll("<player>", args[1]));
@@ -1073,7 +1073,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean partyList(CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean partyList(CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 0) {
             Party party_ = null;
             for (Party party : MinigamesAPI.getAPI().global_party.values()) {
@@ -1097,7 +1097,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean partyDisband(CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean partyDisband(CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 0) {
             if (MinigamesAPI.getAPI().global_party.containsKey(p.getName())) {
                 MinigamesAPI.getAPI().global_party.get(p.getName()).disband();
@@ -1108,7 +1108,7 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean partyLeave(CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
+    public boolean partyLeave(CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
         if (args.length > 0) {
             if (MinigamesAPI.getAPI().global_party.containsKey(p.getName())) {
                 MinigamesAPI.getAPI().global_party.get(p.getName()).disband();

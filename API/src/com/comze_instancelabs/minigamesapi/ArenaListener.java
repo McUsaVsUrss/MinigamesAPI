@@ -94,9 +94,9 @@ public class ArenaListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onMove(PlayerMoveEvent event) {
         try {
-            final Player p = event.getPlayer();
+            Player p = event.getPlayer();
             if (pli.containsGlobalPlayer(p.getName())) {
-                final Arena a = pli.global_players.get(p.getName());
+                Arena a = pli.global_players.get(p.getName());
                 if (!pli.containsGlobalLost(p.getName()) && !pli.global_arcade_spectator.containsKey(p.getName())) {
                     if (a.getArenaState() == ArenaState.INGAME) {
                         if (p.getLocation().getBlockY() + loseY < a.getSpawns().get(0).getBlockY()) {
@@ -133,8 +133,8 @@ public class ArenaListener implements Listener {
                 } else {
                     if (a.getArenaState() == ArenaState.INGAME) {
                         if (pli.spectator_move_y_lock && event.getPlayer().getLocation().getBlockY() < (a.getSpawns().get(0).getBlockY() + 30D) || event.getPlayer().getLocation().getBlockY() > (a.getSpawns().get(0).getBlockY() + 30D)) {
-                            final float b = p.getLocation().getYaw();
-                            final float c = p.getLocation().getPitch();
+                            float b = p.getLocation().getYaw();
+                            float c = p.getLocation().getPitch();
                             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                                 @Override
                                 public void run() {
@@ -190,9 +190,9 @@ public class ArenaListener implements Listener {
         if (pli.containsGlobalPlayer(event.getEntity().getName())) {
             event.setDeathMessage(null);
             event.getEntity().setHealth(20D);
-            final Player p = event.getEntity();
+            Player p = event.getEntity();
 
-            final Arena arena = pli.global_players.get(p.getName());
+            Arena arena = pli.global_players.get(p.getName());
             if (arena.getArenaState() == ArenaState.JOIN || (arena.getArenaState() == ArenaState.STARTING && !arena.startedIngameCountdown)) {
                 if (arena.isArcadeMain()) {
                     Util.teleportPlayerFixed(p, arena.getWaitingLobbyTemp());
@@ -223,7 +223,7 @@ public class ArenaListener implements Listener {
                     }
                 }
             }
-            final int count_ = count;
+            int count_ = count;
 
             Bukkit.getScheduler().runTaskLater(MinigamesAPI.getAPI(), new Runnable() {
                 public void run() {
@@ -354,6 +354,7 @@ public class ArenaListener implements Listener {
                     Arena a = (Arena) pli.global_players.get(p.getName());
                     if (a.getArenaState() == ArenaState.INGAME) {
                         a.lastdamager.put(p.getName(), attacker.getName());
+                        a.lastdamageTime.put(p.getName(), System.currentTimeMillis());
                         if (pli.damage_identifier_effects) {
                             ChatColor c = ChatColor.YELLOW;
                             if (event.getDamage() >= 5D) {
@@ -518,7 +519,7 @@ public class ArenaListener implements Listener {
                 if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
                     return;
                 }
-                final Sign s = (Sign) event.getClickedBlock().getState();
+                Sign s = (Sign) event.getClickedBlock().getState();
                 // people will most likely do strange formats, so let's just try
                 // to get signs by location rather than locally by reading the sign
                 Arena arena = Util.getArenaBySignLocation(plugin, event.getClickedBlock().getLocation());
@@ -585,7 +586,7 @@ public class ArenaListener implements Listener {
         }
 
         if (event.hasItem()) {
-            final Player p = event.getPlayer();
+            Player p = event.getPlayer();
             if (!pli.containsGlobalPlayer(p.getName())) {
                 return;
             }
@@ -706,7 +707,7 @@ public class ArenaListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        final Player p = event.getPlayer();
+        Player p = event.getPlayer();
         pli.getStatsInstance().update(p.getName());
         if (pli.containsGlobalPlayer(p.getName())) {
             pli.global_players.remove(p.getName());
@@ -744,7 +745,7 @@ public class ArenaListener implements Listener {
 
         if (plugin.getConfig().getBoolean("config.bungee.game_on_join")) {
             int c = 0;
-            final List<String> arenas = new ArrayList<String>();
+            List<String> arenas = new ArrayList<String>();
             for (String arena : pli.getArenasConfig().getConfig().getKeys(false)) {
                 if (!arena.equalsIgnoreCase("mainlobby") && !arena.equalsIgnoreCase("strings") && !arena.equalsIgnoreCase("config")) {
                     c++;
@@ -805,7 +806,7 @@ public class ArenaListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onChat(final AsyncPlayerChatEvent event) {
+    public void onChat(AsyncPlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!pli.chat_enabled) {
             if (pli.containsGlobalPlayer(p.getName())) {
@@ -871,13 +872,13 @@ public class ArenaListener implements Listener {
             // Don't hide/show players when 1.8 spectator mode is enabled
             return;
         }
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
         if (pli.containsGlobalPlayer(player.getName())) {
-            final int visibleDistance = 16;
+            int visibleDistance = 16;
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    final List<Player> nearby = getPlayersWithin(player, visibleDistance);
+                    List<Player> nearby = getPlayersWithin(player, visibleDistance);
                     updateEntities(nearby, false);
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
