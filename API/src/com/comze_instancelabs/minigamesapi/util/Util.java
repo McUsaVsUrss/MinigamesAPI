@@ -51,7 +51,7 @@ public class Util {
         }
     }
 
-    public static void teleportPlayerFixed(final Player p, final Location l) {
+    public static void teleportPlayerFixed(Player p, Location l) {
         ArenaLogger.debug("Teleporting " + p.getName());
         if (p.isInsideVehicle()) {
             Entity ent = p.getVehicle();
@@ -73,13 +73,13 @@ public class Util {
         p.setHealth(20D);
     }
 
-    public static void teleportAllPlayers(ArrayList<String> players, final Location l) {
+    public static void teleportAllPlayers(ArrayList<String> players, Location l) {
         Long delay = 1L;
         for (String pl : players) {
             if (!Validator.isPlayerOnline(pl)) {
                 continue;
             }
-            final Player p = Bukkit.getPlayer(pl);
+            Player p = Bukkit.getPlayer(pl);
             Bukkit.getScheduler().runTaskLater(MinigamesAPI.getAPI(), new Runnable() {
                 public void run() {
                     Util.teleportPlayerFixed(p, l);
@@ -197,7 +197,7 @@ public class Util {
         Cuboid c = new Cuboid(Util.getComponentForArena(plugin, arena, "bounds.low"), Util.getComponentForArena(plugin, arena, "bounds.high"));
         Location start = c.getLowLoc();
         Location end = c.getHighLoc();
-        Utils.saveToFile(start, end, arena, null);
+        Utils.saveToFile(start, end, plugin.getName() + "_" + arena, null);
         //int width = end.getBlockX() - start.getBlockX();
         //int length = end.getBlockZ() - start.getBlockZ();
         //int height = end.getBlockY() - start.getBlockY();
@@ -239,114 +239,27 @@ public class Util {
         MinigamesAPI.getAPI().getLogger().info("saved");
     }
 
-    public static void loadArenaFromFileSYNC(final JavaPlugin plugin, final Arena arena) {
+    public static void loadArenaFromFileSYNC(JavaPlugin plugin, Arena arena) {
         try {
-            MinigamesAPI.getCC().getAsynchBuilder().waitForReset(arena.getInternalName());
+            if(Utils.isSaveFileValid(plugin.getName() + "_" + arena.getInternalName())){
+                MinigamesAPI.getCC().getAsynchBuilder().waitForReset(plugin.getName() + "_" + arena.getInternalName());
+            }else{
+                try {
+                    MinigamesAPI.getCC().getAsynchBuilder().waitForReset(arena.getInternalName());
+                }catch (Exception x){
+                    x.printStackTrace();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            try{
+                MinigamesAPI.getCC().getAsynchBuilder().waitForReset(arena.getInternalName());
+            }catch (Exception exx){
+                exx.printStackTrace();
+            }
         }
-
         arena.setArenaState(ArenaState.JOIN);
         Util.updateSign(plugin, arena);
-
-		/*int failcount = 0;
-		final ArrayList<ArenaBlock> failedblocks = new ArrayList<ArenaBlock>();
-
-		File f = new File(plugin.getDataFolder() + "/" + arena.getInternalName());
-		if (!f.exists()) {
-			plugin.getLogger().warning("Could not find arena file for " + arena.getInternalName());
-			arena.setArenaState(ArenaState.JOIN);
-			Bukkit.getScheduler().runTask(plugin, new Runnable() {
-				public void run() {
-					Util.updateSign(plugin, arena);
-				}
-			});
-			return;
-		}
-		FileInputStream fis = null;
-		BukkitObjectInputStream ois = null;
-		try {
-			fis = new FileInputStream(f);
-			ois = new BukkitObjectInputStream(fis);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			while (true) {
-				Object b = null;
-				try {
-					b = ois.readObject();
-				} catch (EOFException e) {
-					MinigamesAPI.getAPI().getLogger().info("Finished restoring map for " + arena.getInternalName() + " with old reset method.");
-
-					arena.setArenaState(ArenaState.JOIN);
-					Bukkit.getScheduler().runTask(plugin, new Runnable() {
-						public void run() {
-							Util.updateSign(plugin, arena);
-						}
-					});
-				} catch (ClosedChannelException e) {
-					System.out.println("Something is wrong with your arena file and the reset might not be successful. Also, you're using an outdated reset method.");
-				} catch (Exception e) {
-					e.printStackTrace();
-					arena.setArenaState(ArenaState.JOIN);
-					Bukkit.getScheduler().runTask(plugin, new Runnable() {
-						public void run() {
-							Util.updateSign(plugin, arena);
-						}
-					});
-				}
-
-				if (b != null) {
-					ArenaBlock ablock = (ArenaBlock) b;
-					try {
-						Block b_ = ablock.getBlock().getWorld().getBlockAt(ablock.getBlock().getLocation());
-						if (!b_.getType().toString().equalsIgnoreCase(ablock.getMaterial().toString())) {
-							b_.setType(ablock.getMaterial());
-							b_.setData(ablock.getData());
-						}
-						if (b_.getType() == Material.CHEST) {
-							((Chest) b_.getState()).getInventory().setContents(ablock.getInventory());
-							((Chest) b_.getState()).update();
-						}
-					} catch (IllegalStateException e) {
-						failcount += 1;
-						failedblocks.add(ablock);
-					}
-				} else {
-					break;
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			ois.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MinigamesAPI.getAPI(), new Runnable() {
-			public void run() {
-				for (ArenaBlock ablock : failedblocks) {
-					Block b_ = ablock.getBlock().getWorld().getBlockAt(ablock.getBlock().getLocation());
-					if (!b_.getType().toString().equalsIgnoreCase(ablock.getMaterial().toString())) {
-						b_.setType(ablock.getMaterial());
-						b_.setData(ablock.getData());
-					}
-					if (b_.getType() == Material.CHEST) {
-						((Chest) b_.getState()).getInventory().setContents(ablock.getInventory());
-						((Chest) b_.getState()).update();
-					}
-				}
-			}
-		}, 40L);
-		MinigamesAPI.getAPI().getLogger().info("Successfully finished!");
-
-		return;*/
     }
 
     public static Sign getSignFromArena(JavaPlugin plugin, String arena) {
@@ -845,7 +758,7 @@ public class Util {
         System.out.println(Bukkit.getVersion());
         System.out.println(system);
         System.out.println(startDir);
-        final File f = new File(startDir + "\\" + fileName);
+        File f = new File(startDir + "\\" + fileName);
         if (!f.exists()) {
             PrintWriter writer;
             try {

@@ -241,11 +241,11 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
                         for (String p_ : temp) {
                             a.leavePlayer(p_, true);
                         }
-                        try {
+                        /*try {
                             a.getSmartReset().resetRaw();
                         } catch (Exception e) {
                             System.out.println("Failed resetting arena at onDisable. " + e.getMessage());
-                        }
+                        }*/
                     } else {
                         System.out.println(a.getName() + " not initialized thus not reset at onDisable.");
                     }

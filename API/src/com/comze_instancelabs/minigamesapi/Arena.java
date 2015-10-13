@@ -368,6 +368,7 @@ public class Arena {
         if (Validator.isPlayerValid(plugin, playername, this)) {
             Player p = Bukkit.getPlayer(playername);
             ArenaPlayer ap = ArenaPlayer.getPlayerInstance(playername);
+            //Bukkit.broadcastMessage(ChatColor.RED + "[" + plugin.getName().toUpperCase() + ChatColor.RESET + "" + ChatColor.RED + "] " + ChatColor.RESET + p.getDisplayName() + " ha joinato la mappa " + getName() + "!");
             Bukkit.getServer().getPluginManager().callEvent(new PlayerJoinLobbyEvent(p, plugin, this));
             Util.sendMessage(plugin, p, pli.getMessagesConfig().you_joined_arena.replaceAll("<arena>", this.getDisplayName()));
             Util.sendMessage(plugin, p, pli.getMessagesConfig().minigame_description);
