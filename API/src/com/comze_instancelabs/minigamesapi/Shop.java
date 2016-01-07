@@ -30,7 +30,7 @@ public class Shop {
         this.pli = pli;
     }
 
-    public void openGUI(String p) {
+    public void openGUI(final String p) {
         IconMenu iconm;
         int mincount = pli.getAClasses().keySet().size();
         if (lasticonm.containsKey(p)) {

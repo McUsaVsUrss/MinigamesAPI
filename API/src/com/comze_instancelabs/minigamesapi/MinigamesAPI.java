@@ -514,7 +514,7 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
                 String playerData = msgin.readUTF();
                 String plugin_ = playerData.split(":")[0];
                 String arena = playerData.split(":")[1];
-                String playername = playerData.split(":")[2];
+                final String playername = playerData.split(":")[2];
                 //System.out.println(plugin_ + " -> " + arena);
                 JavaPlugin plugin = null;
                 for (JavaPlugin pl : this.pinstances.keySet()) {
@@ -524,7 +524,7 @@ public class MinigamesAPI extends JavaPlugin implements PluginMessageListener {
                     }
                 }
                 if (plugin != null) {
-                    Arena a = pinstances.get(plugin).getArenaByName(arena);
+                    final Arena a = pinstances.get(plugin).getArenaByName(arena);
                     if (a != null) {
                         if (a.getArenaState() != ArenaState.INGAME && a.getArenaState() != ArenaState.RESTARTING && !a.containsPlayer(playername)) {
                             Bukkit.getScheduler().runTaskLater(this, new Runnable() {

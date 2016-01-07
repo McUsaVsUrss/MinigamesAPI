@@ -83,8 +83,8 @@ public class ArcadeInstance {
         this.leaveArcade(playername, true);
     }
 
-    public void leaveArcade(String playername, boolean endOfGame) {
-        PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
+    public void leaveArcade(final String playername, boolean endOfGame) {
+        final PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
         if (players.contains(playername)) {
             players.remove(playername);
         }
@@ -147,8 +147,8 @@ public class ArcadeInstance {
         Collections.shuffle(minigames);
 
         currentlobbycount = plugin.getConfig().getInt("config.arcade.lobby_countdown") + 1;
-        ArcadeInstance ai = this;
-        PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
+        final ArcadeInstance ai = this;
+        final PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
 
         currenttaskid = Bukkit.getScheduler().runTaskTimer(MinigamesAPI.getAPI(), new Runnable() {
             public void run() {
@@ -179,7 +179,7 @@ public class ArcadeInstance {
         } catch (Exception e) {
 
         }
-        ArrayList<String> temp = new ArrayList<String>(players);
+        final ArrayList<String> temp = new ArrayList<String>(players);
         for (String p_ : temp) {
             this.leaveArcade(p_, false);
         }
@@ -193,7 +193,7 @@ public class ArcadeInstance {
         hs.addAll(temp);
         temp.clear();
         temp.addAll(hs);
-        ArcadeInstance ai = this;
+        final ArcadeInstance ai = this;
         if (stopOfGame && plugin.getConfig().getBoolean("config.arcade.infinite_mode.enabled")) {
             if (temp.size() > 1) {
                 for (String p_ : temp) {
@@ -249,7 +249,7 @@ public class ArcadeInstance {
             return;
         }
         // System.out.println(delay + " " + currentindex);
-        ArcadeInstance ai = this;
+        final ArcadeInstance ai = this;
         Bukkit.getScheduler().runTaskLater(MinigamesAPI.getAPI(), new Runnable() {
             public void run() {
                 ArrayList<String> temp = new ArrayList<String>(players);

@@ -73,13 +73,13 @@ public class Util {
         p.setHealth(20D);
     }
 
-    public static void teleportAllPlayers(ArrayList<String> players, Location l) {
+    public static void teleportAllPlayers(ArrayList<String> players, final Location l) {
         Long delay = 1L;
         for (String pl : players) {
             if (!Validator.isPlayerOnline(pl)) {
                 continue;
             }
-            Player p = Bukkit.getPlayer(pl);
+            final Player p = Bukkit.getPlayer(pl);
             Bukkit.getScheduler().runTaskLater(MinigamesAPI.getAPI(), new Runnable() {
                 public void run() {
                     Util.teleportPlayerFixed(p, l);
@@ -758,7 +758,7 @@ public class Util {
         System.out.println(Bukkit.getVersion());
         System.out.println(system);
         System.out.println(startDir);
-        File f = new File(startDir + "\\" + fileName);
+        final File f = new File(startDir + "\\" + fileName);
         if (!f.exists()) {
             PrintWriter writer;
             try {

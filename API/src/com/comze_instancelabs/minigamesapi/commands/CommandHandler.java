@@ -640,13 +640,13 @@ public class CommandHandler {
         return true;
     }
 
-    public boolean resetArena(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, JavaPlugin plugin, Player p) {
+    public boolean resetArena(PluginInstance pli, CommandSender sender, String[] args, String uber_permission, String cmd, String action, final JavaPlugin plugin, Player p) {
         if (!sender.hasPermission(uber_permission + ".reset")) {
             sender.sendMessage(pli.getMessagesConfig().no_perm);
             return true;
         }
         if (args.length > 1) {
-            Arena a = pli.getArenaByName(args[1]);
+            final Arena a = pli.getArenaByName(args[1]);
             if (a != null) {
                 if (Validator.isArenaValid(plugin, a)) {
                     Bukkit.getScheduler().runTask(plugin, new Runnable() {

@@ -366,8 +366,8 @@ public class Arena {
         this.players.add(playername);
 
         if (Validator.isPlayerValid(plugin, playername, this)) {
-            Player p = Bukkit.getPlayer(playername);
-            ArenaPlayer ap = ArenaPlayer.getPlayerInstance(playername);
+            final Player p = Bukkit.getPlayer(playername);
+            final ArenaPlayer ap = ArenaPlayer.getPlayerInstance(playername);
             //Bukkit.broadcastMessage(ChatColor.RED + "[" + plugin.getName().toUpperCase() + ChatColor.RESET + "" + ChatColor.RED + "] " + ChatColor.RESET + p.getDisplayName() + " ha joinato la mappa " + getName() + "!");
             Bukkit.getServer().getPluginManager().callEvent(new PlayerJoinLobbyEvent(p, plugin, this));
             Util.sendMessage(plugin, p, pli.getMessagesConfig().you_joined_arena.replaceAll("<arena>", this.getDisplayName()));
@@ -407,7 +407,7 @@ public class Arena {
             if (ai == null && !this.isArcadeMain()) {
                 this.skip_join_lobby = plugin.getConfig().getBoolean("config.countdowns.skip_lobby");
             }
-            Arena a = this;
+            final Arena a = this;
             ap.setInventories(p.getInventory().getContents(), p.getInventory().getArmorContents());
             if (this.getArenaType() == ArenaType.JUMPNRUN) {
                 Util.teleportPlayerFixed(p, this.spawns.get(currentspawn));
@@ -559,12 +559,12 @@ public class Arena {
         }
     }
 
-    public void leavePlayerRaw(String playername, boolean fullLeave) {
+    public void leavePlayerRaw(final String playername, final boolean fullLeave) {
         if (!this.containsPlayer(playername)) {
             return;
         }
-        Player p = Bukkit.getPlayer(playername);
-        ArenaPlayer ap = ArenaPlayer.getPlayerInstance(playername);
+        final Player p = Bukkit.getPlayer(playername);
+        final ArenaPlayer ap = ArenaPlayer.getPlayerInstance(playername);
         if (p == null) {
             return;
         }
@@ -689,9 +689,9 @@ public class Arena {
             pli.getClassesHandler().lasticonm.remove(p.getName());
         }
 
-        String arenaname = this.getInternalName();
-        Arena a = this;
-        boolean started_ = started;
+        final String arenaname = this.getInternalName();
+        final Arena a = this;
+        final boolean started_ = started;
         Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
             public void run() {
                 if (p != null) {
@@ -744,7 +744,7 @@ public class Arena {
         }, 5L);
 
         if (plugin.getConfig().getBoolean("config.bungee.teleport_all_to_server_on_stop.tp")) {
-            String server = plugin.getConfig().getString("config.bungee.teleport_all_to_server_on_stop.server");
+            final String server = plugin.getConfig().getString("config.bungee.teleport_all_to_server_on_stop.server");
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 public void run() {
                     BungeeUtil.connectToServer(MinigamesAPI.getAPI(), p.getName(), server);
@@ -760,7 +760,7 @@ public class Arena {
      * @param playername name of the player
      */
     public void spectateGame(String playername) {
-        Player p = Bukkit.getPlayer(playername);
+        final Player p = Bukkit.getPlayer(playername);
         if (p == null) {
             return;
         }
@@ -771,7 +771,7 @@ public class Arena {
         pli.scoreboardManager.updateScoreboard(plugin, this);
         if (!pli.last_man_standing) {
             if (this.getPlayerAlive() < 1) {
-                Arena a = this;
+                final Arena a = this;
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     public void run() {
                         a.stop();
@@ -782,7 +782,7 @@ public class Arena {
             }
         } else {
             if (this.getPlayerAlive() < 2) {
-                Arena a = this;
+                final Arena a = this;
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     public void run() {
                         a.stop();
@@ -825,7 +825,7 @@ public class Arena {
         }
     }
 
-    public void spectateRaw(Player p) {
+    public void spectateRaw(final Player p) {
         if (pli.dead_in_fake_bed_effects) {
             Effects.playFakeBed(this, p);
         }
@@ -834,7 +834,7 @@ public class Arena {
             Effects.sendGameModeChange(p, 3);
         }
 
-        Location temp = this.spawns.get(0);
+        final Location temp = this.spawns.get(0);
         try {
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 public void run() {
@@ -881,14 +881,14 @@ public class Arena {
         startLobby(true);
     }
 
-    public void startLobby(boolean countdown) {
+    public void startLobby(final boolean countdown) {
         if (currentstate != ArenaState.JOIN) {
             return;
         }
         this.setArenaState(ArenaState.STARTING);
         Util.updateSign(plugin, this);
         currentlobbycount = pli.lobby_countdown;
-        Arena a = this;
+        final Arena a = this;
 
         // skip countdown
         if (!countdown) {
@@ -905,7 +905,7 @@ public class Arena {
         } catch (Exception e) {
             ;
         }
-        Sound lobbycountdown_sound = lobbycountdown_sound_;
+        final Sound lobbycountdown_sound = lobbycountdown_sound_;
 
         currenttaskid = Bukkit.getScheduler().runTaskTimer(MinigamesAPI.getAPI(), new Runnable() {
             public void run() {
@@ -970,7 +970,7 @@ public class Arena {
                 Util.clearInv(p);
             }
         }
-        Arena a = this;
+        final Arena a = this;
         Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
             public void run() {
                 pli.scoreboardManager.updateScoreboard(plugin, a);
@@ -988,7 +988,7 @@ public class Arena {
         } catch (Exception e) {
             ;
         }
-        Sound ingamecountdown_sound = ingamecountdown_sound_;
+        final Sound ingamecountdown_sound = ingamecountdown_sound_;
 
         currenttaskid = Bukkit.getScheduler().runTaskTimer(MinigamesAPI.getAPI(), new Runnable() {
             public void run() {
@@ -1031,7 +1031,7 @@ public class Arena {
         }
     }
 
-    public void startRaw(Arena a) {
+    public void startRaw(final Arena a) {
         currentarena.getArena().setArenaState(ArenaState.INGAME);
         startedIngameCountdown = false;
         Util.updateSign(plugin, a);
@@ -1110,7 +1110,7 @@ public class Arena {
      */
     public synchronized void stop() {
         Bukkit.getServer().getPluginManager().callEvent(new ArenaStopEvent(plugin, this));
-        Arena a = this;
+        final Arena a = this;
         if (maximum_game_time != null) {
             maximum_game_time.cancel();
         }
@@ -1143,8 +1143,8 @@ public class Arena {
 
         this.setArenaState(ArenaState.RESTARTING);
 
-        ArrayList<String> temp = new ArrayList<String>(this.getAllPlayers());
-        for (String p_ : temp) {
+        final ArrayList<String> temp = new ArrayList<String>(this.getAllPlayers());
+        for (final String p_ : temp) {
             try {
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     public void run() {
@@ -1223,7 +1223,7 @@ public class Arena {
         }
 
         if (plugin.getConfig().getBoolean("config.bungee.teleport_all_to_server_on_stop.tp")) {
-            String server = plugin.getConfig().getString("config.bungee.teleport_all_to_server_on_stop.server");
+            final String server = plugin.getConfig().getString("config.bungee.teleport_all_to_server_on_stop.server");
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 public void run() {
                     for (Player p : Bukkit.getOnlinePlayers()) {

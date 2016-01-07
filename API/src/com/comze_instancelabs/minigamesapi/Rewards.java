@@ -86,7 +86,6 @@ public class Rewards {
      * Give a player a kill reward
      *
      * @param p_     Playername
-     * @param reward Amount of statistics points the player gets
      */
     public void giveKillReward(String p_) {
         if (Validator.isPlayerOnline(p_)) {
@@ -152,7 +151,7 @@ public class Rewards {
     public void giveWinReward(String p_, Arena a, ArrayList<String> players, int global_multiplier) {
         if (Validator.isPlayerOnline(p_)) {
             PluginInstance pli = MinigamesAPI.getAPI().getPluginInstance(plugin);
-            Player p = Bukkit.getPlayer(p_);
+            final Player p = Bukkit.getPlayer(p_);
             if (!pli.global_lost.containsKey(p_)) {
                 String received_rewards_msg = pli.getMessagesConfig().you_received_rewards;
                 if (economyrewards && MinigamesAPI.economy) {
