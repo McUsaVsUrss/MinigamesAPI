@@ -1269,42 +1269,8 @@ public class Arena {
 
     }
 
-    protected boolean killEntity(Entity e){
-        if(e.getType() == EntityType.DROPPED_ITEM)return true;
-        if(e.getType() == EntityType.ARROW)return true;
-        if(e.getType() == EntityType.PRIMED_TNT)return true;
-        if(e.getType() == EntityType.CREEPER)return true;
-        if(e.getType() == EntityType.SKELETON)return true;
-        if(e.getType() == EntityType.SPIDER)return true;
-        if(e.getType() == EntityType.GIANT)return true;
-        if(e.getType() == EntityType.ZOMBIE)return true;
-        if(e.getType() == EntityType.SLIME)return true;
-        if(e.getType() == EntityType.GHAST)return true;
-        if(e.getType() == EntityType.PIG_ZOMBIE)return true;
-        if(e.getType() == EntityType.ENDERMAN)return true;
-        if(e.getType() == EntityType.CAVE_SPIDER)return true;
-        if(e.getType() == EntityType.SILVERFISH)return true;
-        if(e.getType() == EntityType.BLAZE)return true;
-        if(e.getType() == EntityType.MAGMA_CUBE)return true;
-        if(e.getType() == EntityType.ENDER_DRAGON)return true;
-        if(e.getType() == EntityType.WITHER)return true;
-        if(e.getType() == EntityType.BAT)return true;
-        if(e.getType() == EntityType.WITCH)return true;
-        if(e.getType() == EntityType.ENDERMITE)return true;
-        if(e.getType() == EntityType.GUARDIAN)return true;
-        if(e.getType() == EntityType.PIG)return true;
-        if(e.getType() == EntityType.SHEEP)return true;
-        if(e.getType() == EntityType.COW)return true;
-        if(e.getType() == EntityType.CHICKEN)return true;
-        if(e.getType() == EntityType.SQUID)return true;
-        if(e.getType() == EntityType.WOLF)return true;
-        if(e.getType() == EntityType.MUSHROOM_COW)return true;
-        if(e.getType() == EntityType.SNOWMAN)return true;
-        if(e.getType() == EntityType.OCELOT)return true;
-        if(e.getType() == EntityType.IRON_GOLEM)return true;
-        if(e.getType() == EntityType.HORSE)return true;
-        if(e.getType() == EntityType.RABBIT)return true;
-        return false;
+    protected boolean killEntity(Entity e) {
+        return e.getType() == EntityType.DROPPED_ITEM || e.getType() == EntityType.ARROW || e.getType() == EntityType.PRIMED_TNT || e.getType() == EntityType.CREEPER || e.getType() == EntityType.SKELETON || e.getType() == EntityType.SPIDER || e.getType() == EntityType.GIANT || e.getType() == EntityType.ZOMBIE || e.getType() == EntityType.SLIME || e.getType() == EntityType.GHAST || e.getType() == EntityType.PIG_ZOMBIE || e.getType() == EntityType.ENDERMAN || e.getType() == EntityType.CAVE_SPIDER || e.getType() == EntityType.SILVERFISH || e.getType() == EntityType.BLAZE || e.getType() == EntityType.MAGMA_CUBE || e.getType() == EntityType.ENDER_DRAGON || e.getType() == EntityType.WITHER || e.getType() == EntityType.BAT || e.getType() == EntityType.WITCH || e.getType() == EntityType.ENDERMITE || e.getType() == EntityType.GUARDIAN || e.getType() == EntityType.PIG || e.getType() == EntityType.SHEEP || e.getType() == EntityType.COW || e.getType() == EntityType.CHICKEN || e.getType() == EntityType.SQUID || e.getType() == EntityType.WOLF || e.getType() == EntityType.MUSHROOM_COW || e.getType() == EntityType.SNOWMAN || e.getType() == EntityType.OCELOT || e.getType() == EntityType.IRON_GOLEM || e.getType() == EntityType.HORSE || e.getType() == EntityType.RABBIT;
     }
     /**
      * Rebuilds an arena from file (only for arenas of REGENERATION type)
